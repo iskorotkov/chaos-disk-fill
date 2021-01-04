@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: chaos-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: disk-fill
+  namespace: chaos-app
+  labels:
+    app: disk-fill
+  annotations:
+    # Annotation for Litmus
+    litmuschaos.io/chaos: "true"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: disk-fill
+  template:
+    metadata:
+      labels:
+        app: disk-fill
+      annotations:
+        # Annotation for Litmus
+        litmuschaos.io/chaos: "true"
+    spec:
+      containers:
+        - name: disk-fill
+          image: iskorotkov/chaos-disk-fill:v0.1.0-alpha.1
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
