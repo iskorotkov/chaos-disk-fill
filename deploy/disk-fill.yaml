@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: disk-fill
-          image: iskorotkov/chaos-disk-fill:v0.1.0-alpha.1
+          image: iskorotkov/chaos-disk-fill:v0.1.0
           resources:
             limits:
               memory: "64Mi"
